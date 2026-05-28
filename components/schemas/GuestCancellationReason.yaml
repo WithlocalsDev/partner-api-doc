@@ -1,0 +1,19 @@
+type: string
+description: |
+  Why the guest is cancelling. Sent on partner-initiated cancellations
+  (`DELETE /bookings/{bookingId}`).
+
+  | Value | Meaning |
+  |---|---|
+  | `MY_PLANS_CHANGED`    | My plans changed |
+  | `FOUND_BETTER_OPTION` | Found better option |
+  | `HOST_ASKED_TO_CANCEL`| Host asked to cancel |
+  | `HOST_NOT_RESPONDING` | Host not responding |
+  | `OTHER`               | Other |
+enum:
+  - MY_PLANS_CHANGED
+  - FOUND_BETTER_OPTION
+  - HOST_ASKED_TO_CANCEL
+  - HOST_NOT_RESPONDING
+  - OTHER
+example: MY_PLANS_CHANGED

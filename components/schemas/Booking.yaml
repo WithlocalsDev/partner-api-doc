@@ -2,7 +2,7 @@ type: object
 description: |
   A partner booking. Returned by create, amend, cancel, and read.
 
-  When `status=CANCELLED`, `cancellationReason` is set and the record persists
+  When `status=CANCELLEDBYGUEST`, `cancellationReason` is set and the record persists
   for partner refund handling.
 required: [id, status, productId, title, date, time, timeZone, createdAt]
 properties:
@@ -35,8 +35,12 @@ properties:
   status: { $ref: "./BookingStatus.yaml" }
   cancellationReason:
     type: string
-    enum: [guest, host, no_show, admin, other]
-    description: Present when `status=CANCELLED`.
+    enum: [CANCELLEDBYGUEST, CANCELLEDBYHOST, CANCELLEDBYADMIN, HOSTNOSHOW]
+    description: |
+      Present when `status=CANCELLED`. Partner-initiated cancellations
+      (`DELETE /bookings/{bookingId}`) always set `CANCELLEDBYGUEST`; the
+      other values appear on bookings cancelled internally by the host,
+      admin, or marked as a no-show.
   cancellationDeadline:
     type: string
     format: date-time

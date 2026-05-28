@@ -27,12 +27,10 @@ patch:
   operationId: amendBooking
   summary: Amend a booking (date / time and / or party size)
   description: |
-    Partial update. Subject to `Trip.canBePartnerRescheduled`; may trigger an
-    internal host transfer if the original host is unavailable on the new
-    date.
+    Partial update. May trigger an
+    internal host transfer if the original host is unavailable on the new date.
 
-    Possible errors: `BAD_REQUEST`, `NOT_FOUND`, `PRECONDITION_FAILED` (past
-    cut-off), `UNAUTHORIZED`.
+    Possible errors: `BAD_REQUEST`, `NOT_FOUND`, `PRECONDITION_FAILED` (past cut-off), `UNAUTHORIZED`.
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
   requestBody:
@@ -59,7 +57,7 @@ delete:
   operationId: cancelBooking
   summary: Cancel a booking
   description: |
-    Cancels a booking. The booking **persists** with `status=CANCELLED` and a
+    Cancels a booking. The booking **persists** with `status=CANCELLEDBYGUEST` and a
     `cancellationReason`; a subsequent `GET` still returns it.
 
     The cancellation `reason` may be sent in the request body, or as the
@@ -72,7 +70,7 @@ delete:
       in: query
       required: false
       description: Fallback for clients that cannot send a `DELETE` body.
-      schema: { type: string }
+      schema: { $ref: "../components/schemas/GuestCancellationReason.yaml" }
   requestBody:
     required: false
     content:

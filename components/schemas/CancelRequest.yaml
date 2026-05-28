@@ -1,7 +1,4 @@
 type: object
 description: Optional body of `DELETE /bookings/{bookingId}`.
 properties:
-  reason:
-    type: string
-    description: Human-readable cancellation reason for support context.
-    example: "Customer changed plans."
+  reason: { $ref: "./GuestCancellationReason.yaml" }

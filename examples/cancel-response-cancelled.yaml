@@ -8,5 +8,5 @@ value:
   time: "10:00"
   timeZone: "Europe/Amsterdam"
   status: CANCELLED
-  cancellationReason: guest
+  cancellationReason: CANCELLEDBYGUEST
   createdAt: "2026-05-28T13:42:11Z"
