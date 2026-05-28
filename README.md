@@ -32,8 +32,8 @@ yarn preview     # build + serve at http://localhost:3001/api-reference/
 
 | Artifact | URL |
 |---|---|
-| Docs | <https://developers.withlocals.com/api-reference/> |
-| Bundled spec | <https://developers.withlocals.com/api-reference/openapi.yaml> |
+| Docs | <https://developers.withlocals.com/> |
+| Bundled spec | <https://developers.withlocals.com/openapi.yaml> |
 
 Published by [`.github/workflows/build.yml`](./.github/workflows/build.yml) —
 lint on PR, build + deploy to GitHub Pages on merge to `main`.
