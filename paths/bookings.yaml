@@ -1,0 +1,61 @@
+get:
+  tags: [Bookings]
+  operationId: listBookings
+  summary: Look up bookings by reseller reference
+  description: |
+    Returns bookings whose `resellerReference` matches the query. Useful when
+    the partner has lost the Withlocals booking id but still has its own.
+
+    Possible errors: `UNAUTHORIZED`.
+  x-maps-to: "TripBookingQueryResource.getByExternalId"
+  parameters:
+    - name: resellerReference
+      in: query
+      required: true
+      description: Partner's own booking id (internally `external_id`).
+      schema: { type: string }
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items: { $ref: "../components/schemas/Booking.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+
+post:
+  tags: [Bookings]
+  operationId: createBooking
+  summary: Create a confirmed booking
+  description: |
+    Creates a `CONFIRMED` booking in a single call. v1 does **not** have a
+    reserve / confirm two-step — guest details are required upfront and the
+    booking is committed immediately. Use `Idempotency-Key` to make retries
+    safe (enforcement phased to Phase 3; the header is accepted from day one).
+
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `CONFLICT` (slot no longer
+    available — instant collision when a guest booked it microseconds earlier).
+  x-maps-to: "TripPartnerBookingService.createNewBooking"
+  parameters:
+    - $ref: "../components/parameters/IdempotencyKey.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/CreateBookingRequest.yaml" }
+        examples:
+          golden:
+            $ref: "../examples/create-booking-request.yaml"
+  responses:
+    "201":
+      description: Created (`CONFIRMED`)
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Booking.yaml" }
+          examples:
+            golden:
+              $ref: "../examples/booking-confirmed.yaml"
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+    "409": { $ref: "../components/responses/Conflict.yaml" }

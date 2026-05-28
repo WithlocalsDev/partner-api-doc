@@ -1,0 +1,7 @@
+summary: 7-day window for 2 guests
+value:
+  productId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+  localDateRange:
+    from: "2026-07-15"
+    to: "2026-07-21"
+  numberOfGuests: 2

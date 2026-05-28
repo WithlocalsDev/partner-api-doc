@@ -1,0 +1,7 @@
+name: bookingId
+in: path
+required: true
+description: Withlocals booking id (returned by `POST /bookings`).
+schema:
+  type: string
+  format: uuid

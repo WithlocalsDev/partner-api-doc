@@ -1,0 +1,22 @@
+get:
+  tags: [Products]
+  operationId: getProduct
+  summary: Get a single product by id
+  description: |
+    Fetch one product by id.
+
+    Possible errors: `NOT_FOUND`, `UNAUTHORIZED`.
+  x-maps-to: "experience read interface (new thin mapping in Phase 1)"
+  parameters:
+    - $ref: "../components/parameters/ProductId.yaml"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Product.yaml" }
+          examples:
+            golden:
+              $ref: "../examples/product.yaml"
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }

@@ -1,0 +1,14 @@
+summary: First page of products
+value:
+  items:
+    - id: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+      title: "Hidden food gems of Amsterdam"
+      area: "Amsterdam"
+      countryCode: "NL"
+      instantConfirmation: true
+      durationMinutes: 180
+      languages: ["en", "nl"]
+      price: { amount: 60.00, currency: "EUR" }
+  page: 1
+  pageSize: 50
+  total: 248

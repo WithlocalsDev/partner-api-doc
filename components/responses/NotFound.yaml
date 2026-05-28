@@ -1,0 +1,8 @@
+description: The resource does not exist or is not visible to this partner.
+content:
+  application/json:
+    schema: { $ref: "../schemas/Error.yaml" }
+    example:
+      error: NOT_FOUND
+      errorMessage: "No product with that id."
+      requestId: "req_7c2b18d3"

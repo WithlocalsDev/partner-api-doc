@@ -1,0 +1,10 @@
+description: |
+  Conflicting state. Common causes: the hold has expired, the booking has
+  already been confirmed or cancelled, or a concurrent change occurred.
+content:
+  application/json:
+    schema: { $ref: "../schemas/Error.yaml" }
+    example:
+      error: CONFLICT
+      errorMessage: "Hold expired before confirmation."
+      requestId: "req_7c2b18d5"

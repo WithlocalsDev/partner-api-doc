@@ -1,0 +1,14 @@
+summary: An Amsterdam food tour
+value:
+  id: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+  title: "Hidden food gems of Amsterdam"
+  description: "A 3-hour walking tour through Amsterdam's most loved local food spots, hosted by a local."
+  prettyUrl: "hidden-food-gems-of-amsterdam"
+  area: "Amsterdam"
+  countryCode: "NL"
+  instantConfirmation: true
+  durationMinutes: 180
+  languages: ["en", "nl"]
+  price:
+    amount: 60.00
+    currency: "EUR"

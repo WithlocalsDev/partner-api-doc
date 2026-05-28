@@ -1,0 +1,27 @@
+type: object
+description: |
+  Self-describing supplier metadata. Returned from `GET /`. Partners SHOULD
+  read this on first connect and cache it.
+
+  - Prices are quoted in **EUR** only in v1 (see `Money`); there is no
+    per-request currency selection.
+  - v1 has **no reserve step** — `POST /bookings` creates a `CONFIRMED`
+    booking directly.
+required: [supplierName, endpoint]
+properties:
+  supplierName:
+    type: string
+    example: "Withlocals"
+  endpoint:
+    type: string
+    format: uri
+    description: |
+      Canonical base URL of this API, including the version prefix.
+    example: "https://api.withlocals.com/partner/v1"
+  supportsIdempotencyKey:
+    type: boolean
+    default: false
+    description: |
+      When `true`, repeated `POST /bookings` with the same `Idempotency-Key`
+      header return the original result. v1 ships with `false` (the header
+      is accepted but not enforced); flips to `true` in future versions.

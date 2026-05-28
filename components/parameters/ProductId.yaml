@@ -1,0 +1,7 @@
+name: productId
+in: path
+required: true
+description: Withlocals product (experience) id.
+schema:
+  type: string
+  format: uuid

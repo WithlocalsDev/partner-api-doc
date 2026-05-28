@@ -1,0 +1,28 @@
+type: object
+description: |
+  Error envelope. The HTTP status follows the internal `ErrorMessageType`
+  mapping (`ErrorPrinter.scala`); the `error` field is the partner-stable
+  enum that clients switch against.
+required: [error, errorMessage]
+properties:
+  error:
+    type: string
+    description: Stable error code. Partners are expected to switch on this value.
+    enum:
+      - BAD_REQUEST           # 400 — validation, malformed input
+      - UNAUTHORIZED          # 401 — missing/invalid credentials
+      - FORBIDDEN             # 403 — partner not authorized for this resource
+      - NOT_FOUND             # 404 — resource not found / not visible to this partner
+      - CONFLICT              # 409 — concurrent change / duplicate / hold already expired
+      - PRECONDITION_FAILED   # 412 — booking not amendable/cancellable
+      - UNPROCESSABLE         # 422 — domain rule violation (e.g. invalid party size)
+      - RATE_LIMITED          # 429 — per-partner rate limit
+      - INTERNAL_ERROR        # 500
+  errorMessage:
+    type: string
+    description: Human-readable message. Not stable; do not parse.
+    example: "Hold expired before confirmation."
+  requestId:
+    type: string
+    description: Trace id for support requests.
+    example: "req_5f3a9b71"

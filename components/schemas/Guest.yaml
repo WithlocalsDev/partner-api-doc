@@ -1,0 +1,8 @@
+type: object
+description: A single guest on a booking.
+required: [firstName]
+properties:
+  firstName: { type: string, example: "Anna" }
+  lastName: { type: string, example: "Kowalska" }
+  email: { type: string, format: email, example: "anna@example.com" }
+  phone: { type: string, example: "+31201234567" }

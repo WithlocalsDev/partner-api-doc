@@ -1,0 +1,29 @@
+post:
+  tags: [Availability]
+  operationId: availabilityCalendar
+  summary: Day-grain availability calendar
+  description: |
+    Lighter than `/availability`: one entry per day with a coarse
+    `AVAILABLE` / `SOLD_OUT` / `CLOSED` status, suitable for rendering a
+    month grid. Same range cap and caching caveats as `/availability`.
+
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
+  x-maps-to: "ExperienceAgendaService.getAvailabilityJson"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/AvailabilityRequest.yaml" }
+        examples:
+          golden:
+            $ref: "../examples/availability-request.yaml"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items: { $ref: "../components/schemas/CalendarDay.yaml" }
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }

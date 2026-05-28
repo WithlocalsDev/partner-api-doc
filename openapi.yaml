@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Withlocals Partner API
+  version: 1.0.0
+  description: |
+    A single contract for OTA / reseller partners. Covers
+    products, availability, and the create -> amend -> cancel booking
+    lifecycle. 
+    
+    `POST /bookings` creates a `CONFIRMED` booking in a single call.
+
+  contact:
+    name: Withlocals Partner Integrations
+    email: partners@withlocals.com
+  x-logo:
+    url: ./assets/logo.svg
+    altText: Withlocals
+    href: https://www.withlocals.com
+    backgroundColor: "#ffffff"
+
+servers:
+  - url: https://api.withlocals.com/api/partner/v1
+    description: Production (Phase 1+ — not live yet)
+  - url: https://sandbox.withlocals.com
+    description: Sandbox (Prism mock — paths served at root)
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Supplier
+    description: Self-describing supplier metadata.
+  - name: Products
+    description: Bookable products (experiences).
+  - name: Availability
+    description: Available slots and calendar.
+  - name: Bookings
+    description: Reserve, confirm, amend, cancel, and read bookings.
+
+paths:
+  /:                                { $ref: "./paths/supplier.yaml" }
+  /products:                        { $ref: "./paths/products.yaml" }
+  /products/{productId}:            { $ref: "./paths/products_id.yaml" }
+  /availability:                    { $ref: "./paths/availability.yaml" }
+  /availability/calendar:           { $ref: "./paths/availability_calendar.yaml" }
+  /bookings:                        { $ref: "./paths/bookings.yaml" }
+  /bookings/{bookingId}:            { $ref: "./paths/bookings_id.yaml" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque
+      description: |
+        Per-partner opaque API token issued by Withlocals. Send on every
+        request as:
+
+            Authorization: Bearer <token>

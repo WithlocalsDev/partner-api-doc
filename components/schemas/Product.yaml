@@ -1,0 +1,37 @@
+type: object
+description: A bookable experience.
+required: [id, title]
+properties:
+  id: { type: string, format: uuid }
+  title: { type: string, example: "Hidden food gems of Amsterdam" }
+  description: { type: string }
+  prettyUrl:
+    type: string
+    description: Slug suitable for partner display URLs.
+    example: "hidden-food-gems-of-amsterdam"
+  area: { type: string, example: "Amsterdam" }
+  countryCode: { type: string, example: "NL" }
+  instantConfirmation:
+    type: boolean
+    description: |
+      When `true`, bookings on this product are confirmed immediately without
+      host approval.
+    example: true
+  durationMinutes:
+    type: integer
+    minimum: 0
+    example: 180
+  languages:
+    type: array
+    items: { type: string }
+    description: ISO-639-1 codes the experience can be hosted in.
+    example: ["en", "nl"]
+  price: { $ref: "./Money.yaml" }
+  images:
+    type: array
+    items:
+      type: object
+      required: [url]
+      properties:
+        url: { type: string, format: uri }
+        alt: { type: string }

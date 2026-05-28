@@ -1,0 +1,85 @@
+name: Build & deploy partner API docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  spec:
+    name: Lint & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+      - run: yarn install --immutable  # Yarn Berry; Classic 1.x: --frozen-lockfile
+      - run: yarn lint
+      - run: yarn build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: partner-api-dist
+          path: dist/
+
+  # ----------------------------------------------------------------------------
+  # Deploy jobs — DISABLED (`if: false`) until GCP infra is in place:
+  # the `wl-partner-docs` bucket, the `wl-partner-mock` Cloud Run service,
+  # the custom domains, and Workload Identity Federation between GitHub Actions
+  # and a GCP service account with deploy permissions.
+  #
+  # To enable: set the GCP_WIF_PROVIDER, GCP_DEPLOY_SA, and GCP_PROJECT repo
+  # secrets, then flip `if: false` → `if: github.ref == 'refs/heads/main'`.
+  # ----------------------------------------------------------------------------
+
+  deploy-docs:
+    if: false
+    needs: spec
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+      - run: yarn install --immutable && yarn build
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SA }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Sync to GCS
+        run: gsutil -m rsync -d -r dist gs://wl-partner-docs
+
+  deploy-mock:
+    if: false
+    needs: spec
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+      - run: yarn install --immutable && yarn bundle
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SA }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Build & deploy Cloud Run mock
+        env:
+          PROJECT: ${{ secrets.GCP_PROJECT }}
+        run: |
+          gcloud builds submit --tag gcr.io/$PROJECT/wl-partner-mock:${{ github.sha }} .
+          gcloud run deploy wl-partner-mock \
+            --image gcr.io/$PROJECT/wl-partner-mock:${{ github.sha }} \
+            --region europe-west1 \
+            --quiet

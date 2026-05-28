@@ -1,0 +1,12 @@
+type: object
+description: One day in the availability calendar.
+required: [localDate, status]
+properties:
+  localDate: { type: string, format: date, example: "2026-07-15" }
+  status:
+    type: string
+    enum: [AVAILABLE, SOLD_OUT, CLOSED]
+    description: |
+      - `AVAILABLE` — at least one start time has capacity.
+      - `SOLD_OUT` — start times exist but none has capacity.
+      - `CLOSED` — no start times configured for this day.

@@ -1,0 +1,10 @@
+name: Idempotency-Key
+in: header
+required: false
+description: |
+  Client-generated key making the request safe to retry. Repeated requests with
+  the same key return the original response. **Enforcement is phased (Phase 3);
+  the header is accepted from day one — supply it now to future-proof retries.**
+schema:
+  type: string
+  maxLength: 255

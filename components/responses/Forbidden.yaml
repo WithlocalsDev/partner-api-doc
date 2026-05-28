@@ -1,0 +1,8 @@
+description: Partner is not authorized to act on this resource.
+content:
+  application/json:
+    schema: { $ref: "../schemas/Error.yaml" }
+    example:
+      error: FORBIDDEN
+      errorMessage: "Booking belongs to a different partner."
+      requestId: "req_7c2b18d4"

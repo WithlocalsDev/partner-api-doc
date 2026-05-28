@@ -1,0 +1,95 @@
+get:
+  tags: [Bookings]
+  operationId: getBooking
+  summary: Get a booking by id
+  description: |
+    Reads a single booking by its Withlocals id. Ownership-scoped: a partner
+    can only fetch bookings belonging to its own company.
+
+    Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
+  x-maps-to: "trip read by id + partner-ownership check (new in Phase 2)"
+  parameters:
+    - $ref: "../components/parameters/BookingId.yaml"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Booking.yaml" }
+          examples:
+            confirmed:
+              $ref: "../examples/booking-confirmed.yaml"
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "403": { $ref: "../components/responses/Forbidden.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+
+patch:
+  tags: [Bookings]
+  operationId: amendBooking
+  summary: Amend a booking (date / time and / or party size)
+  description: |
+    Partial update. Subject to `Trip.canBePartnerRescheduled`; may trigger an
+    internal host transfer if the original host is unavailable on the new
+    date.
+
+    Possible errors: `BAD_REQUEST`, `NOT_FOUND`, `PRECONDITION_FAILED` (past
+    cut-off), `UNAUTHORIZED`.
+  x-maps-to: "TripPartnerBookingService.amend"
+  parameters:
+    - $ref: "../components/parameters/BookingId.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/AmendRequest.yaml" }
+        examples:
+          golden:
+            $ref: "../examples/amend-request.yaml"
+  responses:
+    "200":
+      description: Amended
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Booking.yaml" }
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "412": { $ref: "../components/responses/PreconditionFailed.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+
+delete:
+  tags: [Bookings]
+  operationId: cancelBooking
+  summary: Cancel a booking
+  description: |
+    Cancels a booking. The booking **persists** with `status=CANCELLED` and a
+    `cancellationReason`; a subsequent `GET` still returns it.
+
+    The cancellation `reason` may be sent in the request body, or as the
+    `reason` query parameter for clients that cannot send `DELETE` bodies.
+
+    Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
+  x-maps-to: "BookingsApi.cancelBooking (PartnerGuestCancelledReason)"
+  parameters:
+    - $ref: "../components/parameters/BookingId.yaml"
+    - name: reason
+      in: query
+      required: false
+      description: Fallback for clients that cannot send a `DELETE` body.
+      schema: { type: string }
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/CancelRequest.yaml" }
+  responses:
+    "200":
+      description: Cancelled
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Booking.yaml" }
+          examples:
+            golden:
+              $ref: "../examples/cancel-response-cancelled.yaml"
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "403": { $ref: "../components/responses/Forbidden.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }

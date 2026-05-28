@@ -1,0 +1,28 @@
+# Redocly CLI configuration — themes the rendered docs.
+# See https://redocly.com/docs/cli/configuration/
+
+theme:
+  openapi:
+    theme:
+      colors:
+        primary:
+          main: "#e71575"     # Withlocals pink (canonical CTA color from email receipts)
+        accent:
+          main: "#09b4ed"     # Secondary accent (cyan)
+        success:
+          main: "#69BD69"
+        warning:
+          main: "#F35738"
+      typography:
+        fontFamily: '"Inter", system-ui, -apple-system, Segoe UI, sans-serif'
+        headings:
+          fontFamily: '"Inter", system-ui, -apple-system, Segoe UI, sans-serif'
+          fontWeight: "600"
+        code:
+          fontFamily: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace'
+      sidebar:
+        backgroundColor: "#fafafa"
+        width: "280px"
+      # rightPanel left to Redoc's default styling.
+      logo:
+        gutter: "24px"

@@ -1,0 +1,37 @@
+type: object
+description: |
+  Body of `POST /bookings` — creates a `CONFIRMED` booking in a single call.
+  Guest details are supplied upfront; there is no separate confirmation step
+  in v1.
+required: [productId, localDate, localTime, numberOfAdults, mainGuest]
+properties:
+  productId: { type: string, format: uuid }
+  localDate: { type: string, format: date, example: "2026-07-15" }
+  localTime:
+    type: string
+    pattern: "^[0-2][0-9]:[0-5][0-9]$"
+    example: "10:00"
+  numberOfAdults:
+    type: integer
+    minimum: 1
+    example: 2
+  numberOfChildren:
+    type: integer
+    minimum: 0
+    default: 0
+  mainGuest: { $ref: "./Guest.yaml" }
+  otherGuests:
+    type: array
+    items: { $ref: "./Guest.yaml" }
+  resellerReference:
+    type: string
+    description: Partner's own booking id; stored as `external_id`. Recommended for traceability.
+    example: "GYG-2026-XYZ-001"
+  specialRequest:
+    type: string
+    description: Free-text note from the guest, forwarded to the host.
+  tourLanguage:
+    type: string
+    description: ISO-639-1 language code.
+    example: "en"
+  netPrice: { $ref: "./Money.yaml" }

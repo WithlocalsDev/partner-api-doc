@@ -1,0 +1,13 @@
+type: object
+description: |
+  Body of `PATCH /bookings/{bookingId}`. Any subset of fields may be supplied;
+  unspecified fields are left unchanged. Subject to
+  `Trip.canBePartnerRescheduled` server-side.
+properties:
+  localDate: { type: string, format: date }
+  localTime:
+    type: string
+    pattern: "^[0-2][0-9]:[0-5][0-9]$"
+  numberOfAdults: { type: integer, minimum: 1 }
+  numberOfChildren: { type: integer, minimum: 0 }
+  netPrice: { $ref: "./Money.yaml" }

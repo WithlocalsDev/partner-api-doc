@@ -1,0 +1,10 @@
+description: |
+  Precondition for the action is not met (e.g. the booking is past its
+  partner-amendable window).
+content:
+  application/json:
+    schema: { $ref: "../schemas/Error.yaml" }
+    example:
+      error: PRECONDITION_FAILED
+      errorMessage: "Booking is no longer amendable (cut-off passed)."
+      requestId: "req_7c2b18d6"

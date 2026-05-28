@@ -1,0 +1,22 @@
+type: object
+description: A single available start time for a product on a date.
+required: [localDate, localTime, capacity]
+properties:
+  localDate: { type: string, format: date, example: "2026-07-15" }
+  localTime:
+    type: string
+    pattern: "^[0-2][0-9]:[0-5][0-9]$"
+    example: "10:00"
+  capacity:
+    type: integer
+    minimum: 0
+    description: |
+      **Semantics:** this is the count of *hosts concurrently available* at
+      this start time, not the count of remaining seats. A `capacity` of 2
+      means two bookings for this slot can succeed in parallel (one per host).
+    example: 2
+  price: { $ref: "./Money.yaml" }
+  timeZone:
+    type: string
+    description: IANA time-zone of `localDate` / `localTime`.
+    example: "Europe/Amsterdam"

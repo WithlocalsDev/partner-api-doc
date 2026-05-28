@@ -1,0 +1,14 @@
+summary: Book 2 adults at 10:00 on 15 Jul 2026
+value:
+  productId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+  localDate: "2026-07-15"
+  localTime: "10:00"
+  numberOfAdults: 2
+  numberOfChildren: 0
+  mainGuest:
+    firstName: "Anna"
+    lastName: "Kowalska"
+    email: "anna@example.com"
+    phone: "+31201234567"
+  resellerReference: "GYG-2026-XYZ-001"
+  tourLanguage: "en"

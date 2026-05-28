@@ -1,0 +1,18 @@
+type: string
+description: |
+  Partner-facing booking lifecycle. Translated from the internal `TripStatus`
+  by a single mapper (`PartnerBookingStatus.fromTripStatus`).
+
+  v1 lifecycle (no holds — `POST /bookings` creates a CONFIRMED booking
+  directly):
+
+  | Partner status | From internal `TripStatus` |
+  |---|---|
+  | `CONFIRMED`  | `CONFIRMED`, `COMPLETED` |
+  | `CANCELLED`  | `CANCELLEDBYGUEST` / `HOST` / `ADMIN` / `HOSTNOSHOW` / `COUPON` (with `cancellationReason`) |
+
+  Internal statuses that belong to the guest negotiation flow (`PROPOSAL`,
+  `PAIDPROPOSAL`, `UNCONFIRMED`, `REJECTED`, `DELETED`) are not
+  partner-visible. `RESERVATION` / `TIMEDOUT` / `EXPIRED` cannot occur in
+  v1 because there is no reserve step.
+enum: [CONFIRMED, CANCELLED]

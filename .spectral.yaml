@@ -1,0 +1,11 @@
+# Spectral ruleset — house style guide as code.
+# See https://docs.stoplight.io/docs/spectral
+extends:
+  - [spectral:oas, recommended]
+
+rules:
+  operation-operationId: error
+  operation-description: error
+  operation-tag-defined: error
+  operation-success-response: error
+  oas3-schema: error
