@@ -4,12 +4,12 @@
   "private": true,
   "description": "OpenAPI 3.1 spec for the Withlocals partner API.",
   "scripts": {
-    "bundle": "redocly bundle openapi.yaml -o dist/openapi.yaml",
-    "docs": "node -e \"require('fs').copyFileSync('index.html','dist/index.html');console.log('copied index.html -> dist/index.html');\"",
-    "copy-assets": "node -e \"const f=require('fs');if(f.existsSync('assets')){f.cpSync('assets','dist/assets',{recursive:true});console.log('copied assets/ -> dist/assets/');}\"",
+    "bundle": "redocly bundle openapi.yaml -o dist/api-reference/openapi.yaml",
+    "docs": "node -e \"const f=require('fs');f.mkdirSync('dist/api-reference',{recursive:true});f.copyFileSync('index.html','dist/api-reference/index.html');console.log('copied index.html -> dist/api-reference/index.html');\"",
+    "copy-assets": "node -e \"const f=require('fs');if(f.existsSync('assets')){f.cpSync('assets','dist/api-reference/assets',{recursive:true});console.log('copied assets/ -> dist/api-reference/assets/');}\"",
     "mock": "prism mock openapi.yaml",
     "lint:redocly": "redocly lint openapi.yaml",
-    "lint:spectral": "spectral lint dist/openapi.yaml --ruleset .spectral.yaml",
+    "lint:spectral": "spectral lint dist/api-reference/openapi.yaml --ruleset .spectral.yaml",
     "lint": "yarn lint:redocly && yarn bundle && yarn lint:spectral",
     "build": "rimraf dist && yarn bundle && yarn docs && yarn copy-assets",
     "preview": "yarn build && serve dist -l 3001"

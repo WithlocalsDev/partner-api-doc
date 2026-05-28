@@ -51,8 +51,8 @@ won't silently break the docs.
 yarn install
 
 yarn lint               # redocly + spectral
-yarn build              # bundle to dist/openapi.yaml + copy index.html + assets
-yarn preview            # build + serve docs at http://localhost:3001
+yarn build              # bundle to dist/api-reference/ + copy index.html + assets
+yarn preview            # build + serve at http://localhost:3001 (docs at /api-reference/)
 yarn mock               # boot Prism mock at http://127.0.0.1:4010
 ```
 
@@ -108,8 +108,8 @@ In **Postman / Insomnia**, set Authorization → Bearer Token with any value.
 
 | Artifact | URL | How |
 |---|---|---|
-| Docs | `https://developers.withlocals.com` | GitHub Pages, published from `dist/` by CI on every push to `main`. |
-| Bundled spec | `https://developers.withlocals.com/openapi.yaml` | Same artifact; partners point codegen here. |
+| Docs | `https://developers.withlocals.com/api-reference/` | GitHub Pages, published from `dist/` by CI on every push to `main`. |
+| Bundled spec | `https://developers.withlocals.com/api-reference/openapi.yaml` | Same artifact; partners point codegen here. |
 
 CI workflow: [`.github/workflows/build.yml`](./.github/workflows/build.yml) —
 lint on PR, build + deploy to Pages on merge to `main`.
