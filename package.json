@@ -6,7 +6,7 @@
   "packageManager": "yarn@4.13.0",
   "scripts": {
     "bundle": "redocly bundle openapi.yaml -o dist/api-reference/openapi.yaml",
-    "docs": "node -e \"const f=require('fs');f.mkdirSync('dist/api-reference',{recursive:true});f.copyFileSync('index.html','dist/api-reference/index.html');console.log('copied index.html -> dist/api-reference/index.html');\"",
+    "docs": "node -e \"const f=require('fs');f.mkdirSync('dist/api-reference',{recursive:true});f.copyFileSync('index.html','dist/api-reference/index.html');f.copyFileSync('redirect.html','dist/index.html');console.log('copied index.html -> dist/api-reference/index.html');console.log('copied redirect.html -> dist/index.html');\"",
     "copy-assets": "node -e \"const f=require('fs');if(f.existsSync('assets')){f.cpSync('assets','dist/api-reference/assets',{recursive:true});console.log('copied assets/ -> dist/api-reference/assets/');}\"",
     "mock": "prism mock openapi.yaml",
     "lint:redocly": "redocly lint openapi.yaml",
