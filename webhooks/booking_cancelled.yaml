@@ -1,0 +1,41 @@
+post:
+  tags: [Webhooks]
+  operationId: bookingCancelledWebhook
+  summary: Booking cancelled
+  description: |
+    Sent to the partner's registered webhook URL when a booking transitions
+    to `CANCELLED`, regardless of who initiated the cancellation (guest,
+    host, admin, or system no-show).
+
+    **Delivery semantics:**
+
+    - HTTP `POST` with `Content-Type: application/json`.
+    - **At-least-once.** Retries on non-2xx for ~24h with exponential
+      backoff. Partners MUST dedupe on `eventId`.
+    - **Acknowledge fast.** Any 2xx response stops retries. Process the
+      event asynchronously if work is slow — Withlocals retries after 10s.
+
+    **Signature verification:**
+
+    Every delivery includes an `X-Withlocals-Signature` header of the form
+    `t={unix-seconds},v1={hex-hmac}`. Compute
+    `HMAC-SHA256(secret, "{t}.{raw-body}")` and constant-time-compare to
+    `v1`. Reject if the timestamp is older than 5 minutes (replay window).
+  security: []
+  parameters:
+    - name: X-Withlocals-Signature
+      in: header
+      required: true
+      description: |
+        HMAC-SHA256 signature with timestamp.
+        Format: `t={unix-seconds},v1={hex-digest}`.
+      schema: { type: string }
+      example: "t=1750000000,v1=5257a869e7ecebeda32affa62cdca3fa..."
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/BookingCancelledEvent.yaml" }
+  responses:
+    "2XX":
+      description: Acknowledged — Withlocals stops retrying.

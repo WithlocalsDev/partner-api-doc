@@ -34,6 +34,11 @@ tags:
     description: Availability calendar.
   - name: Bookings
     description: Reserve, confirm, amend, cancel, and read bookings.
+  - name: Webhooks
+    description: |
+      Out-of-band events delivered by Withlocals to a partner-registered URL.
+      Register at `PUT /webhook`. See the *Webhooks* section for the delivery
+      contract and the events Withlocals sends.
 
 paths:
   /:                                { $ref: "./paths/supplier.yaml" }
@@ -42,6 +47,10 @@ paths:
   /availability/calendar:           { $ref: "./paths/availability_calendar.yaml" }
   /bookings:                        { $ref: "./paths/bookings.yaml" }
   /bookings/{bookingId}:            { $ref: "./paths/bookings_id.yaml" }
+  /webhook:                         { $ref: "./paths/webhook.yaml" }
+
+webhooks:
+  bookingCancelled:                 { $ref: "./webhooks/booking_cancelled.yaml" }
 
 components:
   securitySchemes:

@@ -1,0 +1,67 @@
+get:
+  tags: [Webhooks]
+  operationId: getWebhook
+  summary: Get current webhook registration
+  description: |
+    Returns the partner's currently registered webhook URL. The signing
+    `secret` is **not** returned — it is only revealed once, on first
+    registration.
+
+    Possible errors: `NOT_FOUND` (no webhook registered), `UNAUTHORIZED`.
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Webhook.yaml" }
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+
+put:
+  tags: [Webhooks]
+  operationId: setWebhook
+  summary: Register or update the webhook URL
+  description: |
+    Registers a webhook URL on first call (`201`), or updates an existing
+    registration (`200`).
+
+    On first registration, the response includes a `secret` — save it.
+    Withlocals will not return it again. Subsequent reads and updates omit
+    the secret. To rotate, `DELETE /webhook` and re-register.
+
+    The URL must be HTTPS and reachable from the public internet.
+
+    Possible errors: `BAD_REQUEST` (URL invalid or not HTTPS), `UNAUTHORIZED`.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: { $ref: "../components/schemas/Webhook.yaml" }
+  responses:
+    "200":
+      description: Updated
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Webhook.yaml" }
+    "201":
+      description: Registered (first time — `secret` included in response)
+      content:
+        application/json:
+          schema: { $ref: "../components/schemas/Webhook.yaml" }
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
+
+delete:
+  tags: [Webhooks]
+  operationId: deleteWebhook
+  summary: Remove the webhook registration
+  description: |
+    Unregisters the partner's webhook. No further events will be delivered
+    until a new URL is registered via `PUT /webhook`.
+
+    Possible errors: `NOT_FOUND` (nothing registered), `UNAUTHORIZED`.
+  responses:
+    "204":
+      description: Removed
+    "404": { $ref: "../components/responses/NotFound.yaml" }
+    "401": { $ref: "../components/responses/Unauthorized.yaml" }
