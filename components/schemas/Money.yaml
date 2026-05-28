@@ -1,13 +1,6 @@
 type: object
 description: |
-  Net / supplier price.
-
-  **Currency:** v1 only quotes prices in EUR. The `currency` field is locked
-  to `"EUR"` on the wire, but kept as an explicit field for forward
-  compatibility — a future v2 may extend the enum without changing the shape.
-
-  **Taxes:** not itemized in v1. The backend doesn't model partner-facing
-  taxes today. Backed internally by `models.amount.Amount`.
+  Supplier price.
 required: [amount, currency]
 properties:
   amount:

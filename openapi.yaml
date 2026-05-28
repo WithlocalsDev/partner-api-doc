@@ -3,11 +3,11 @@ info:
   title: Withlocals Partner API
   version: 1.0.0
   description: |
-    A single contract for OTA / reseller partners. Covers
-    products, availability, and the create -> amend -> cancel booking
-    lifecycle. 
+    A single contract for OTA partners and other commercial integrations.
+    Covers products, availability, and the create -> amend -> cancel booking
+    lifecycle.
     
-    `POST /bookings` creates a `CONFIRMED` booking in a single call.
+    `POST /bookings` creates a `CONFIRMED` booking.
 
   contact:
     name: Withlocals Partner Integrations
@@ -29,9 +29,9 @@ tags:
   - name: Supplier
     description: Self-describing supplier metadata.
   - name: Products
-    description: Bookable products (experiences).
+    description: Bookable products.
   - name: Availability
-    description: Available slots and calendar.
+    description: Availability calendar.
   - name: Bookings
     description: Reserve, confirm, amend, cancel, and read bookings.
 
@@ -40,7 +40,6 @@ paths:
   /products:                        { $ref: "./paths/products.yaml" }
   /products/{productId}:            { $ref: "./paths/products_id.yaml" }
   /availability/calendar:           { $ref: "./paths/availability_calendar.yaml" }
-  /availability:                    { $ref: "./paths/availability.yaml" }
   /bookings:                        { $ref: "./paths/bookings.yaml" }
   /bookings/{bookingId}:            { $ref: "./paths/bookings_id.yaml" }
 

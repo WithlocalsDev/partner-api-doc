@@ -3,9 +3,7 @@ get:
   operationId: listProducts
   summary: List bookable products
   description: |
-    Paginated list of bookable products. Partners perform a periodic full
-    sync. Subject to a server-side result-window cap on `page * pageSize`
-    (currently 10,000 items).
+    Paginated list of bookable products.
 
     Possible errors: `BAD_REQUEST` (invalid pagination), `UNAUTHORIZED`.
   parameters:

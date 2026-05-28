@@ -1,18 +1,51 @@
 get:
   tags: [Bookings]
   operationId: listBookings
-  summary: Look up bookings by reseller reference
+  summary: Bookings list
   description: |
-    Returns bookings whose `resellerReference` matches the query. Useful when
-    the partner has lost the Withlocals booking id but still has its own.
+    Returns bookings matching the supplied filters. Filters combine with
+    `AND`.
 
-    Possible errors: `UNAUTHORIZED`.
+    **At least one** of `partnerReference`, `supplierReference`, `date`, or
+    the `fromDate` + `toDate` pair must be supplied — a request with no
+    filters returns `400`.
+
+    Use `date` for an exact day, or `fromDate` + `toDate` for a range —
+    `date` is mutually exclusive with the range pair.
+
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
   parameters:
-    - name: resellerReference
+    - name: partnerReference
       in: query
-      required: true
-      description: Partner's own booking id (internally `external_id`).
+      required: false
+      description: Partner's own booking id.
       schema: { type: string }
+      example: "GYG-2026-XYZ-001"
+    - name: supplierReference
+      in: query
+      required: false
+      description: Withlocals booking id (UUID).
+      schema: { type: string, format: uuid }
+    - name: date
+      in: query
+      required: false
+      description: |
+        Single booking date (`YYYY-MM-DD`). Mutually exclusive with
+        `fromDate` / `toDate`.
+      schema: { type: string, format: date }
+      example: "2026-07-15"
+    - name: fromDate
+      in: query
+      required: false
+      description: Range start, inclusive. Pair with `toDate`.
+      schema: { type: string, format: date }
+      example: "2026-07-01"
+    - name: toDate
+      in: query
+      required: false
+      description: Range end, inclusive. Pair with `fromDate`.
+      schema: { type: string, format: date }
+      example: "2026-07-31"
   responses:
     "200":
       description: OK
@@ -21,6 +54,7 @@ get:
           schema:
             type: array
             items: { $ref: "../components/schemas/Booking.yaml" }
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
 
 post:
@@ -28,13 +62,9 @@ post:
   operationId: createBooking
   summary: Create a confirmed booking
   description: |
-    Creates a `CONFIRMED` booking in a single call. v1 does **not** have a
-    reserve / confirm two-step — guest details are required upfront and the
-    booking is committed immediately. Use `Idempotency-Key` to make retries
-    safe (enforcement phased to Phase 3; the header is accepted from day one).
+    Creates a `CONFIRMED` booking. Use `Idempotency-Key` to make retries safe.
 
-    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `CONFLICT` (slot no longer
-    available — instant collision when a guest booked it microseconds earlier).
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `CONFLICT` (slot no longer available).
   parameters:
     - $ref: "../components/parameters/IdempotencyKey.yaml"
   requestBody:

@@ -4,5 +4,5 @@ content:
     schema: { $ref: "../schemas/Error.yaml" }
     example:
       error: BAD_REQUEST
-      errorMessage: "`localDate` is required."
+      errorMessage: "`date` is required."
       requestId: "req_7c2b18d2"

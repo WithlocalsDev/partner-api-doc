@@ -1,7 +1,0 @@
-type: object
-description: An availability lookup result — a list of available start times.
-required: [availability]
-properties:
-  availability:
-    type: array
-    items: { $ref: "./AvailabilitySlot.yaml" }

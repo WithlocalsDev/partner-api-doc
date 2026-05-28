@@ -1,9 +1,12 @@
 summary: Cancelled booking (persists with reason)
 value:
   id: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+  partnerReference: "GYG-2026-XYZ-001"
+  productId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+  title: "Hidden food gems of Amsterdam"
+  date: "2026-07-15"
+  time: "10:00"
+  timeZone: "Europe/Amsterdam"
   status: CANCELLED
   cancellationReason: guest
-  resellerReference: "GYG-2026-XYZ-001"
-  productId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
-  localDate: "2026-07-15"
-  localTime: "10:00"
+  createdAt: "2026-05-28T13:42:11Z"

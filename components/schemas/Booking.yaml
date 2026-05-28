@@ -2,45 +2,64 @@ type: object
 description: |
   A partner booking. Returned by create, amend, cancel, and read.
 
-  Fields present depend on `status`:
-
-    - `CONFIRMED` → `mainGuest` and full guest details set.
-    - `CANCELLED` → `cancellationReason` set; record persists for partner
-      refund logic.
-required: [id, status, productId, localDate, localTime]
+  When `status=CANCELLED`, `cancellationReason` is set and the record persists
+  for partner refund handling.
+required: [id, status, productId, title, date, time, timeZone, createdAt]
 properties:
   id:
     type: string
     format: uuid
     description: Withlocals booking id.
+  partnerReference:
+    type: string
+    description: Partner's own booking id (internally `external_id`).
+    example: "GYG-2026-XYZ-001"
+
+  productId: { type: string, format: uuid }
+  title:
+    type: string
+    description: Denormalized product title at the time of booking.
+    example: "A Relaxed Morning at Hyakumanben Craft Market"
+
+  date: { type: string, format: date, example: "2027-10-15" }
+  time:
+    type: string
+    pattern: "^[0-2][0-9]:[0-5][0-9]$"
+    description: Local clock time at the experience location.
+    example: "09:00"
+  timeZone:
+    type: string
+    description: IANA time zone for `date` / `time`.
+    example: "Asia/Tokyo"
+
   status: { $ref: "./BookingStatus.yaml" }
   cancellationReason:
     type: string
     enum: [guest, host, no_show, admin, other]
-    description: Present when `status=CANCELLED`. Kept separate from the status enum.
-  resellerReference:
+    description: Present when `status=CANCELLED`.
+  cancellationDeadline:
     type: string
-    description: Partner's own booking id (internally `external_id`).
-    example: "GYG-2026-XYZ-001"
-  productId: { type: string, format: uuid }
-  localDate: { type: string, format: date, example: "2026-07-15" }
-  localTime:
+    format: date-time
+    description: Latest moment the booking can be cancelled for a full refund.
+    example: "2027-10-08T09:00:00Z"
+  createdAt:
     type: string
-    pattern: "^[0-2][0-9]:[0-5][0-9]$"
-    example: "10:00"
-  guests:
-    type: object
-    properties:
-      numberOfAdults: { type: integer, minimum: 1, example: 2 }
-      numberOfChildren: { type: integer, minimum: 0, example: 0 }
-  mainGuest: { $ref: "./Guest.yaml" }
-  otherGuests:
-    type: array
-    items: { $ref: "./Guest.yaml" }
-  netPrice: { $ref: "./Money.yaml" }
-  meetingPoint: { type: string }
-  specialRequest: { type: string }
+    format: date-time
+    description: When the booking was created.
+    example: "2026-05-24T17:11:17Z"
+
+  meetingPoint: { $ref: "./MeetingPoint.yaml" }
   tourLanguage:
     type: string
-    description: ISO-639-1 language code (e.g. `en`).
+    description: ISO-639-1 language code.
     example: "en"
+  specialRequest:
+    type: string
+    description: Free-text note from the guest, forwarded to the host.
+
+  host:
+    type: object
+    required: [firstName]
+    description: Minimal host details for day-of identification.
+    properties:
+      firstName: { type: string, example: "Ren" }

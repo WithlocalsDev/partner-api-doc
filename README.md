@@ -79,8 +79,8 @@ curl -s -H 'Authorization: Bearer demo-token' \
   -H 'Content-Type: application/json' \
   -d '{
     "productId": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
-    "localDate": "2026-07-15",
-    "localTime": "10:00",
+    "date": "2026-07-15",
+    "time": "10:00",
     "numberOfAdults": 2,
     "mainGuest": {
       "firstName": "Anna",
@@ -131,7 +131,7 @@ No Prism mock is deployed; `yarn mock` is for local development only.
 - Every 4xx response references the shared `Error` envelope under
   `components/responses/`.
 - Field semantics that differ from a partner's likely default expectation are
-  documented inline on the field itself (see `AvailabilitySlot.capacity`,
+  documented inline on the field itself (see `CalendarDay.vacancies`,
   `Money`, `BookingStatus`).
 
 ## Status

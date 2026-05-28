@@ -74,6 +74,11 @@
         hiddenClients: true,
         darkMode: false,
         orderSchemaPropertiesBy: "preserve",
+        operationsSorter: (a, b) => {
+          const order = ["get", "post", "put", "patch", "delete"];
+          const m = order.indexOf(a.method) - order.indexOf(b.method);
+          return m !== 0 ? m : a.path.localeCompare(b.path);
+        },
         metaData: {
           title: "Withlocals Partner API",
         },

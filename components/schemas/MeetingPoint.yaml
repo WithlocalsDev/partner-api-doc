@@ -1,0 +1,25 @@
+type: object
+description: Where the experience starts.
+required: [name]
+properties:
+  name:
+    type: string
+    description: Short human-readable name.
+    example: "Hyakumanben Chion-ji Temple"
+  address:
+    type: string
+    description: Formatted address line.
+    example: "Japan, 〒600-8012 Kyoto, Shimogyo Ward, 四条大橋西詰"
+  lat:
+    type: number
+    format: double
+    description: Latitude in decimal degrees (WGS84).
+    example: 35.0298797
+  lon:
+    type: number
+    format: double
+    description: Longitude in decimal degrees (WGS84).
+    example: 135.7807599
+  instructions:
+    type: string
+    description: Free-text guidance for finding the meeting spot.

@@ -4,10 +4,10 @@ description: |
   unspecified fields are left unchanged. Subject to
   `Trip.canBePartnerRescheduled` server-side.
 properties:
-  localDate: { type: string, format: date }
-  localTime:
+  date: { type: string, format: date }
+  time:
     type: string
     pattern: "^[0-2][0-9]:[0-5][0-9]$"
   numberOfAdults: { type: integer, minimum: 1 }
   numberOfChildren: { type: integer, minimum: 0 }
-  netPrice: { $ref: "./Money.yaml" }
+  supplierPrice: { $ref: "./Money.yaml" }

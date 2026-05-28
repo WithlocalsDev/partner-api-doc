@@ -3,12 +3,10 @@ post:
   operationId: availabilityCalendar
   summary: Availability calendar
   description: |
-    This endpoint returns a single object per day. 
-    It's designed to be queried for large date ranges and the result is used to populate an availability calendar.
-
-    Lighter than `/availability`: one entry per day with a coarse
-    `AVAILABLE` / `SOLD_OUT` / `CLOSED` status, suitable for rendering a
-    month grid.
+    Returns a single object per day across the requested date range.
+    Each entry carries a coarse `AVAILABLE` / `SOLD_OUT` / `CLOSED` status,
+    a remaining vacancy count, and the list of configured start times —
+    enough to render a month grid with tooltips without a follow-up call.
 
     Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
   requestBody:
