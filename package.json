@@ -7,7 +7,7 @@
   "scripts": {
     "bundle": "redocly bundle openapi.yaml -o dist/api-reference/openapi.yaml",
     "docs": "node scripts/copy-docs.mjs",
-    "copy-assets": "node -e \"const f=require('fs');if(f.existsSync('assets')){f.cpSync('assets','dist/api-reference/assets',{recursive:true});console.log('copied assets/ -> dist/api-reference/assets/');}\"",
+    "copy-assets": "node scripts/copy-assets.mjs",
     "lint:spectral": "spectral lint dist/api-reference/openapi.yaml --ruleset .spectral.yaml",
     "lint": "yarn bundle && yarn lint:spectral",
     "build": "rimraf dist && yarn bundle && yarn docs && yarn copy-assets",
