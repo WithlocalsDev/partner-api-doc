@@ -9,6 +9,9 @@ value:
       durationMinutes: 180
       languages: ["en", "nl"]
       price: { amount: 60.00, currency: "EUR" }
+      images:
+        - url: "https://images.withlocals.com/products/1b9d6bcd/hero.jpg"
+          alt: "Group sampling stroopwafels at an Amsterdam market stall"
   page: 1
   pageSize: 50
   total: 248

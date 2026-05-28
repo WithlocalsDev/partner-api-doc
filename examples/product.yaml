@@ -12,3 +12,10 @@ value:
   price:
     amount: 60.00
     currency: "EUR"
+  images:
+    - url: "https://images.withlocals.com/products/1b9d6bcd/hero.jpg"
+      alt: "Group sampling stroopwafels at an Amsterdam market stall"
+    - url: "https://images.withlocals.com/products/1b9d6bcd/canal.jpg"
+      alt: "Host leading guests along a canal in the Jordaan"
+    - url: "https://images.withlocals.com/products/1b9d6bcd/cheese.jpg"
+      alt: "Aged Dutch cheeses arranged on a tasting board"

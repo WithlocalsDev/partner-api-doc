@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Withlocals Partner API</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/logo.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <style>
+      :root {
+        --scalar-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --scalar-font-code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+      .light-mode {
+        --scalar-color-accent: #e71575;
+        --scalar-background-accent: rgba(231, 21, 117, 0.08);
+      }
+      .dark-mode {
+        --scalar-color-accent: #e71575;
+        --scalar-background-accent: rgba(231, 21, 117, 0.12);
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      .brand-header {
+        display: flex;
+        align-items: center;
+        padding: 14px 24px;
+        flex-shrink: 0;
+        background: var(--scalar-background-1, #ffffff);
+        border-bottom: 1px solid var(--scalar-border-color, rgba(0, 0, 0, 0.08));
+      }
+      .brand-header a {
+        display: inline-flex;
+        align-items: center;
+      }
+      .brand-header img {
+        height: 28px;
+        width: auto;
+        display: block;
+      }
+      #app {
+        flex: 1;
+        min-height: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="brand-header">
+      <a href="https://www.withlocals.com" target="_blank" rel="noopener">
+        <img src="./assets/logo.svg" alt="Withlocals" />
+      </a>
+    </header>
+
+    <div id="app"></div>
+
+    <!--
+      Loading Scalar from jsDelivr CDN, pinned to major version 1.
+      Bump to @2 when ready; @latest would silently break on Scalar majors.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1"></script>
+    <script>
+      Scalar.createApiReference("#app", {
+        url: "./openapi.yaml",
+        withDefaultFonts: false,
+        hiddenClients: true,
+        darkMode: false,
+        metaData: {
+          title: "Withlocals Partner API",
+        },
+      });
+    </script>
+  </body>
+</html>

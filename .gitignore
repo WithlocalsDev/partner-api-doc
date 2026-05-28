@@ -10,3 +10,11 @@ dist/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Editor / IDE state
+.idea/
+.vscode/
+
+# OS metadata
+.DS_Store
+Thumbs.db

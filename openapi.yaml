@@ -20,9 +20,7 @@ info:
 
 servers:
   - url: https://api.withlocals.com/api/partner/v1
-    description: Production (Phase 1+ — not live yet)
-  - url: https://sandbox.withlocals.com
-    description: Sandbox (Prism mock — paths served at root)
+    description: Production
 
 security:
   - bearerAuth: []

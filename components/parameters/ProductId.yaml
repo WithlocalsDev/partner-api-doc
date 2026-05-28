@@ -1,7 +1,7 @@
 name: productId
 in: path
 required: true
-description: Withlocals product (experience) id.
+description: Withlocals product id.
 schema:
   type: string
   format: uuid

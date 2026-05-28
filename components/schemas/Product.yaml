@@ -10,12 +10,19 @@ properties:
     description: Slug suitable for partner display URLs.
     example: "hidden-food-gems-of-amsterdam"
   area: { type: string, example: "Amsterdam" }
-  countryCode: { type: string, example: "NL" }
+  countryCode:
+    type: string
+    pattern: '^[A-Z]{2}$'
+    description: ISO-3166-1 alpha-2 country code (uppercase).
+    example: "NL"
   instantConfirmation:
     type: boolean
     description: |
       When `true`, bookings on this product are confirmed immediately without
-      host approval.
+      host approval. `GET /products` only returns products with
+      `instantConfirmation: true`, so partners will not see un-bookable items.
+      The field is retained for forward compatibility with a future
+      request-to-book flow.
     example: true
   durationMinutes:
     type: integer

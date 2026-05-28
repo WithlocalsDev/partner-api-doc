@@ -20,26 +20,30 @@ monorepo at `docs/plans/partner-api-adapter-review.md`.
 │   └── parameters/           # one file per shared parameter
 ├── examples/                 # reusable request/response examples
 ├── assets/                   # logo and other static files (drop logo.svg here)
-├── redocly.yaml              # Redoc theme (Withlocals brand colors)
+├── index.html                # Scalar shell — loads Scalar from CDN, renders openapi.yaml
 ├── .spectral.yaml            # house style ruleset
-├── Dockerfile                # mock server image (Prism)
+├── Dockerfile                # mock server image (Prism) — local-dev only
 └── package.json              # tooling
 ```
 
 ## Branding & docs theme
 
-The rendered Redoc page is themed via [`redocly.yaml`](./redocly.yaml):
+Docs are rendered by [**Scalar**](https://github.com/scalar/scalar), loaded
+from the jsDelivr CDN. The renderer shell lives at [`index.html`](./index.html)
+and styling is done through Scalar's CSS variables:
 
-- Primary color `#e71575` (Withlocals pink, the canonical receipt-CTA color).
-- Accent color `#09b4ed` (cyan).
-- Inter font family with system-font fallbacks.
+- `--scalar-color-accent: #e71575` — Withlocals pink, applied in both light
+  and dark modes (Scalar's default dark mode is preserved).
+- `--scalar-font: "Inter", …` — Inter loaded from Google Fonts with system
+  fallbacks.
 
-The logo is referenced from the spec's `info.x-logo` extension and resolved
-against `./assets/logo.svg` at render time. The canonical Withlocals logo is
-already at [`assets/logo.svg`](./assets/) — `yarn build` copies the whole
-`assets/` directory into `dist/assets/`, so it ships alongside `index.html`.
-If the file is missing the docs still render; the logo slot just shows a
-broken image.
+The favicon and any inline logo come from [`assets/logo.svg`](./assets/);
+`yarn build` copies the whole `assets/` directory into `dist/assets/` so the
+logo travels with the deploy.
+
+Scalar is **pinned to major version 1** via the CDN URL
+(`@scalar/api-reference@1`) — bug fixes still flow in, but a future Scalar 2.0
+won't silently break the docs.
 
 ## Local commands
 
@@ -47,8 +51,8 @@ broken image.
 yarn install
 
 yarn lint               # redocly + spectral
-yarn build              # bundle to dist/openapi.yaml + render to dist/index.html
-open dist/index.html    # view the docs locally
+yarn build              # bundle to dist/openapi.yaml + copy index.html + assets
+yarn preview            # build + serve docs at http://localhost:3001
 yarn mock               # boot Prism mock at http://127.0.0.1:4010
 ```
 
@@ -104,12 +108,21 @@ In **Postman / Insomnia**, set Authorization → Bearer Token with any value.
 
 | Artifact | URL | How |
 |---|---|---|
-| Docs | `https://developers.withlocals.com` | CI builds `dist/index.html` → `gsutil rsync` to GCS bucket behind CDN. |
-| Bundled spec | `https://developers.withlocals.com/openapi.yaml` | Same job; partners point codegen here. |
-| Mock | `https://sandbox.withlocals.com` | CI builds image from `Dockerfile`, deploys to Cloud Run. |
+| Docs | `https://developers.withlocals.com` | GitHub Pages, published from `dist/` by CI on every push to `main`. |
+| Bundled spec | `https://developers.withlocals.com/openapi.yaml` | Same artifact; partners point codegen here. |
 
 CI workflow: [`.github/workflows/build.yml`](./.github/workflows/build.yml) —
-lint on PR; build (and, once GCP infra is wired, deploy) on merge to `main`.
+lint on PR, build + deploy to Pages on merge to `main`.
+
+**One-time repo setup** (do once, in repo Settings):
+
+1. Settings → Pages → **Source: GitHub Actions**.
+2. Settings → Pages → **Custom domain: `developers.withlocals.com`**, then
+   add a `CNAME` record at the DNS provider pointing to
+   `<org>.github.io`. GitHub provisions HTTPS via Let's Encrypt
+   automatically.
+
+No Prism mock is deployed; `yarn mock` is for local development only.
 
 ## Authoring conventions
 
