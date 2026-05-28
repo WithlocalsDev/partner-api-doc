@@ -3,6 +3,7 @@
   "version": "0.1.0-draft",
   "private": true,
   "description": "OpenAPI 3.1 spec for the Withlocals partner API.",
+  "packageManager": "yarn@4.13.0",
   "scripts": {
     "bundle": "redocly bundle openapi.yaml -o dist/api-reference/openapi.yaml",
     "docs": "node -e \"const f=require('fs');f.mkdirSync('dist/api-reference',{recursive:true});f.copyFileSync('index.html','dist/api-reference/index.html');console.log('copied index.html -> dist/api-reference/index.html');\"",
