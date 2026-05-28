@@ -13,7 +13,7 @@ properties:
   partnerReference:
     type: string
     description: Partner's own booking id (internally `external_id`).
-    example: "GYG-2026-XYZ-001"
+    example: "XYZ-001"
 
   productId: { type: string, format: uuid }
   title:

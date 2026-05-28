@@ -10,5 +10,5 @@ value:
     lastName: "Kowalska"
     email: "anna@example.com"
     phone: "+31201234567"
-  partnerReference: "GYG-2026-XYZ-001"
+  partnerReference: "XYZ-001"
   tourLanguage: "en"

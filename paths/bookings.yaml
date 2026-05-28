@@ -20,7 +20,7 @@ get:
       required: false
       description: Partner's own booking id.
       schema: { type: string }
-      example: "GYG-2026-XYZ-001"
+      example: "XYZ-001"
     - name: supplierReference
       in: query
       required: false
