@@ -75,7 +75,7 @@
         darkMode: false,
         orderSchemaPropertiesBy: "preserve",
         operationsSorter: (a, b) => {
-          const order = ["get", "post", "put", "patch", "delete"];
+          const order = ["get", "put", "patch", "delete", "post"];
           const m = order.indexOf(a.method) - order.indexOf(b.method);
           return m !== 0 ? m : a.path.localeCompare(b.path);
         },
