@@ -7,7 +7,6 @@ get:
     can only fetch bookings belonging to its own company.
 
     Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
-  x-maps-to: "trip read by id + partner-ownership check (new in Phase 2)"
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
   responses:
@@ -34,7 +33,6 @@ patch:
 
     Possible errors: `BAD_REQUEST`, `NOT_FOUND`, `PRECONDITION_FAILED` (past
     cut-off), `UNAUTHORIZED`.
-  x-maps-to: "TripPartnerBookingService.amend"
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
   requestBody:
@@ -68,7 +66,6 @@ delete:
     `reason` query parameter for clients that cannot send `DELETE` bodies.
 
     Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
-  x-maps-to: "BookingsApi.cancelBooking (PartnerGuestCancelledReason)"
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
     - name: reason

@@ -1,0 +1,7 @@
+type: object
+description: Day-grain availability calendar — one entry per day in the range.
+required: [availability]
+properties:
+  availability:
+    type: array
+    items: { $ref: "./CalendarDay.yaml" }

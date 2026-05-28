@@ -1,9 +1,9 @@
 type: object
 description: Availability lookup for a single product over a date range.
-required: [productId, localDateRange]
+required: [productId, dateRange]
 properties:
   productId: { type: string, format: uuid }
-  localDateRange:
+  dateRange:
     type: object
     required: [from, to]
     properties:
@@ -13,8 +13,3 @@ properties:
         format: date
         description: Range length is capped server-side (see operation description).
         example: "2026-07-21"
-  numberOfGuests:
-    type: integer
-    minimum: 1
-    description: Drives per-party-size pricing lookup.
-    example: 2

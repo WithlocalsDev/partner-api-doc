@@ -3,16 +3,10 @@ post:
   operationId: checkAvailability
   summary: Available start times over a date range
   description: |
-    Returns slots with start time, capacity, and per-party-size price.
-
-    **Performance note:** `localDateRange` length is capped server-side (the
-    underlying agenda compute is the path that previously caused a worker OOM,
-    resolved by backend release 3.80.0; range fan-out is now async and cached
-    briefly).
-
+    Returns availability data for a given date range and product.
+    
     Possible errors: `BAD_REQUEST` (range exceeds cap, invalid product),
     `UNAUTHORIZED`.
-  x-maps-to: "ExperienceAgendaPartnerRouter.fullFlattenedAgenda / startingTimesMap"
   requestBody:
     required: true
     content:
@@ -26,9 +20,7 @@ post:
       description: OK
       content:
         application/json:
-          schema:
-            type: array
-            items: { $ref: "../components/schemas/AvailabilitySlot.yaml" }
+          schema: { $ref: "../components/schemas/Availability.yaml" }
           examples:
             golden:
               $ref: "../examples/availability-response.yaml"

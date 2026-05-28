@@ -1,14 +1,16 @@
 post:
   tags: [Availability]
   operationId: availabilityCalendar
-  summary: Day-grain availability calendar
+  summary: Availability calendar
   description: |
+    This endpoint returns a single object per day. 
+    It's designed to be queried for large date ranges and the result is used to populate an availability calendar.
+
     Lighter than `/availability`: one entry per day with a coarse
     `AVAILABLE` / `SOLD_OUT` / `CLOSED` status, suitable for rendering a
-    month grid. Same range cap and caching caveats as `/availability`.
+    month grid.
 
     Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
-  x-maps-to: "ExperienceAgendaService.getAvailabilityJson"
   requestBody:
     required: true
     content:
@@ -22,8 +24,6 @@ post:
       description: OK
       content:
         application/json:
-          schema:
-            type: array
-            items: { $ref: "../components/schemas/CalendarDay.yaml" }
+          schema: { $ref: "../components/schemas/AvailabilityCalendar.yaml" }
     "400": { $ref: "../components/responses/BadRequest.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }

@@ -50,7 +50,7 @@ won't silently break the docs.
 ```bash
 yarn install
 
-yarn lint               # redocly + spectral
+yarn lint               # bundle + spectral
 yarn build              # bundle to dist/api-reference/ + copy index.html + assets
 yarn preview            # build + serve at http://localhost:3001 (docs at /api-reference/)
 yarn mock               # boot Prism mock at http://127.0.0.1:4010
@@ -133,8 +133,6 @@ No Prism mock is deployed; `yarn mock` is for local development only.
 - Field semantics that differ from a partner's likely default expectation are
   documented inline on the field itself (see `AvailabilitySlot.capacity`,
   `Money`, `BookingStatus`).
-- Each operation carries an `x-maps-to` extension naming the backend
-  capability it sits on, so reuse vs. net-new mappings stay auditable.
 
 ## Status
 

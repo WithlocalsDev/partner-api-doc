@@ -9,8 +9,6 @@ get:
       - `supplierName` — identifies the supplier.
       - `endpoint` — canonical base URL of this API.
       - `supportsIdempotencyKey` — currently `false`
-
-  x-maps-to: "static config + PartnerContext (no existing endpoint today)"
   responses:
     "200":
       description: OK

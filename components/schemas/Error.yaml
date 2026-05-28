@@ -1,8 +1,6 @@
 type: object
 description: |
-  Error envelope. The HTTP status follows the internal `ErrorMessageType`
-  mapping (`ErrorPrinter.scala`); the `error` field is the partner-stable
-  enum that clients switch against.
+  Error envelope.
 required: [error, errorMessage]
 properties:
   error:

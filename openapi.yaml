@@ -39,8 +39,8 @@ paths:
   /:                                { $ref: "./paths/supplier.yaml" }
   /products:                        { $ref: "./paths/products.yaml" }
   /products/{productId}:            { $ref: "./paths/products_id.yaml" }
-  /availability:                    { $ref: "./paths/availability.yaml" }
   /availability/calendar:           { $ref: "./paths/availability_calendar.yaml" }
+  /availability:                    { $ref: "./paths/availability.yaml" }
   /bookings:                        { $ref: "./paths/bookings.yaml" }
   /bookings/{bookingId}:            { $ref: "./paths/bookings_id.yaml" }
 

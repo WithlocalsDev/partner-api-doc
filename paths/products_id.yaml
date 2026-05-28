@@ -6,7 +6,6 @@ get:
     Fetch one product by id.
 
     Possible errors: `NOT_FOUND`, `UNAUTHORIZED`.
-  x-maps-to: "experience read interface (new thin mapping in Phase 1)"
   parameters:
     - $ref: "../components/parameters/ProductId.yaml"
   responses:

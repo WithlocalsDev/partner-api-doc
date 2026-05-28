@@ -7,7 +7,6 @@ get:
     the partner has lost the Withlocals booking id but still has its own.
 
     Possible errors: `UNAUTHORIZED`.
-  x-maps-to: "TripBookingQueryResource.getByExternalId"
   parameters:
     - name: resellerReference
       in: query
@@ -36,7 +35,6 @@ post:
 
     Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `CONFLICT` (slot no longer
     available — instant collision when a guest booked it microseconds earlier).
-  x-maps-to: "TripPartnerBookingService.createNewBooking"
   parameters:
     - $ref: "../components/parameters/IdempotencyKey.yaml"
   requestBody:

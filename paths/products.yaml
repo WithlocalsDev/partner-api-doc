@@ -8,7 +8,6 @@ get:
     (currently 10,000 items).
 
     Possible errors: `BAD_REQUEST` (invalid pagination), `UNAUTHORIZED`.
-  x-maps-to: "ExperienceResource.search (canonical fieldset)"
   parameters:
     - $ref: "../components/parameters/Page.yaml"
     - $ref: "../components/parameters/PageSize.yaml"
