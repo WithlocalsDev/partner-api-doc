@@ -19,7 +19,7 @@ info:
     backgroundColor: "#ffffff"
 
 servers:
-  - url: https://api.withlocals.com/api/partner/v1
+  - url: https://api.withlocals.com/v1/partner
     description: Production
 
 security:
