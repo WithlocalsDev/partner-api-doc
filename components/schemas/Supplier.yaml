@@ -7,17 +7,11 @@ description: |
     per-request currency selection.
   - v1 has **no reserve step** — `POST /bookings` creates a `CONFIRMED`
     booking directly.
-required: [supplierName, endpoint]
+required: [supplierName]
 properties:
   supplierName:
     type: string
     example: "Withlocals"
-  endpoint:
-    type: string
-    format: uri
-    description: |
-      Canonical base URL of this API, including the version prefix.
-    example: "https://api.withlocals.com/partner/v1"
   supportsIdempotencyKey:
     type: boolean
     default: false

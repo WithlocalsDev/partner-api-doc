@@ -7,7 +7,6 @@ get:
 
     v1 surfaces:
       - `supplierName` — identifies the supplier.
-      - `endpoint` — canonical base URL of this API.
       - `supportsIdempotencyKey` — currently `false`
   responses:
     "200":
