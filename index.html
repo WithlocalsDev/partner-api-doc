@@ -75,7 +75,13 @@
         darkMode: false,
         orderSchemaPropertiesBy: "preserve",
         operationsSorter: (a, b) => {
-          const order = ["get", "put", "patch", "delete", "post"];
+          // Outbound webhook events (key, not a "/" route) always sort last,
+          // so `bookingCancelled` stays at the end of the Webhooks tag.
+          const aHook = !a.path.startsWith("/");
+          const bHook = !b.path.startsWith("/");
+          if (aHook !== bHook) return aHook ? 1 : -1;
+          // CRUD order: create (POST) before amend (PATCH) before cancel (DELETE).
+          const order = ["get", "put", "post", "patch", "delete"];
           const m = order.indexOf(a.method) - order.indexOf(b.method);
           return m !== 0 ? m : a.path.localeCompare(b.path);
         },
