@@ -10,7 +10,7 @@ value:
   durationMinutes: 180
   languages: ["en", "nl"]
   price:
-    amount: 60.00
+    amount: 6000
     currency: "EUR"
   images:
     - url: "https://images.withlocals.com/products/1b9d6bcd/hero.jpg"
@@ -19,3 +19,12 @@ value:
       alt: "Host leading guests along a canal in the Jordaan"
     - url: "https://images.withlocals.com/products/1b9d6bcd/cheese.jpg"
       alt: "Aged Dutch cheeses arranged on a tasting board"
+  options:
+    - id: "morning"
+      default: true
+      availabilityLocalStartTimes: ["09:00", "10:30"]
+      restrictions: { minGuests: 1, maxGuests: 8 }
+    - id: "afternoon"
+      default: false
+      availabilityLocalStartTimes: ["13:30"]
+      restrictions: { minGuests: 2, maxGuests: 6 }

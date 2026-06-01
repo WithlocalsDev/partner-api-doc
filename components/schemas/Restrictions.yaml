@@ -1,0 +1,14 @@
+type: object
+description: Booking-size limits for a product option.
+required: [minGuests, maxGuests]
+properties:
+  minGuests:
+    type: integer
+    minimum: 1
+    description: Minimum number of guests per booking.
+    example: 1
+  maxGuests:
+    type: integer
+    minimum: 1
+    description: Maximum number of guests per booking.
+    example: 8

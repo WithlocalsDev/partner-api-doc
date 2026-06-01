@@ -1,0 +1,19 @@
+type: object
+description: A bookable variant of a product (e.g. a specific start-time slot).
+required: [id, default, availabilityLocalStartTimes, restrictions]
+properties:
+  id: { type: string }
+  default:
+    type: boolean
+    description: Whether this is the product's default option.
+    example: true
+  availabilityLocalStartTimes:
+    type: array
+    items:
+      type: string
+      pattern: '^([01]\d|2[0-3]):[0-5]\d$'
+    description: |
+      Local clock-time slots (`HH:mm`, 24-hour) at which this option starts.
+      Times are in the experience's own time zone; no date or offset is implied.
+    example: ["09:00", "13:30"]
+  restrictions: { $ref: "./Restrictions.yaml" }

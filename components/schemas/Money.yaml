@@ -4,9 +4,9 @@ description: |
 required: [amount, currency]
 properties:
   amount:
-    type: number
-    description: Decimal value in major units (e.g. `120.00` = €120.00).
-    example: 120.00
+    type: integer
+    description: Integer value in minor units (cents); e.g. `12000` = €120.00.
+    example: 12000
   currency:
     type: string
     enum: [EUR]

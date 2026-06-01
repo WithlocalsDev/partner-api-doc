@@ -42,3 +42,7 @@ properties:
       properties:
         url: { type: string, format: uri }
         alt: { type: string }
+  options:
+    type: array
+    description: Bookable variants of this product.
+    items: { $ref: "./ProductOption.yaml" }
