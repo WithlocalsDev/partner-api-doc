@@ -27,7 +27,7 @@ put:
 
     On first registration, the response includes a `secret` — save it.
     Withlocals will not return it again. Subsequent reads and updates omit
-    the secret. To rotate, `DELETE /webhook` and re-register.
+    the secret. To rotate, `DELETE /webhooks` and re-register.
 
     The URL must be HTTPS and reachable from the public internet.
 
@@ -57,7 +57,7 @@ delete:
   summary: Remove the webhook registration
   description: |
     Unregisters the partner's webhook. No further events will be delivered
-    until a new URL is registered via `PUT /webhook`.
+    until a new URL is registered via `PUT /webhooks`.
 
     Possible errors: `NOT_FOUND` (nothing registered), `UNAUTHORIZED`.
   responses:

@@ -4,8 +4,8 @@ description: |
   dispatch by the `eventType` field in each delivered payload.
 
   The `secret` is returned **only on first registration** (the `201` response
-  of `PUT /webhook`). Subsequent reads and updates exclude it — save it on
-  receipt. To rotate, `DELETE /webhook` then `PUT /webhook` again.
+  of `PUT /webhooks`). Subsequent reads and updates exclude it — save it on
+  receipt. To rotate, `DELETE /webhooks` then `PUT /webhooks` again.
 required: [url]
 properties:
   url:
