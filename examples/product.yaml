@@ -9,9 +9,6 @@ value:
   instantConfirmation: true
   durationMinutes: 180
   languages: ["en", "nl"]
-  price:
-    amount: 6000
-    currency: "EUR"
   images:
     - url: "https://images.withlocals.com/products/1b9d6bcd/hero.jpg"
       alt: "Group sampling stroopwafels at an Amsterdam market stall"
@@ -24,7 +21,17 @@ value:
       default: true
       availabilityLocalStartTimes: ["09:00", "10:30"]
       restrictions: { minGuests: 1, maxGuests: 8 }
+      pricingPerGuest:
+        - guests: 1
+          price: { amount: 9000, currency: "EUR" }
+        - guests: 2
+          price: { amount: 6000, currency: "EUR" }
     - id: "afternoon"
       default: false
       availabilityLocalStartTimes: ["13:30"]
       restrictions: { minGuests: 2, maxGuests: 6 }
+      pricingPerGuest:
+        - guests: 2
+          price: { amount: 6500, currency: "EUR" }
+        - guests: 4
+          price: { amount: 5500, currency: "EUR" }

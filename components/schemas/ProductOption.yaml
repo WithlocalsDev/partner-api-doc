@@ -17,3 +17,10 @@ properties:
       Times are in the experience's own time zone; no date or offset is implied.
     example: ["09:00", "13:30"]
   restrictions: { $ref: "./Restrictions.yaml" }
+  pricingPerGuest:
+    type: array
+    items: { $ref: "./GuestPrice.yaml" }
+    description: |
+      Per-person price per party size (`minGuests`..`maxGuests`), incl. service
+      fee, with the partner discount applied. Party sizes with no configured
+      price are omitted. Authoritative price source.

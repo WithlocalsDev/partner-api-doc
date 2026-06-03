@@ -1,0 +1,13 @@
+type: object
+description: Per-person price for a specific party size.
+required: [guests, price]
+properties:
+  guests:
+    type: integer
+    description: Party size this per-person price applies to.
+    example: 2
+  price:
+    $ref: "./Money.yaml"
+    description: |
+      Per-person price for this party size, incl. service fee, with the
+      partner discount applied.

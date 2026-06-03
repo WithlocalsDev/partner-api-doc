@@ -33,7 +33,6 @@ properties:
     items: { type: string }
     description: ISO-639-1 codes the experience can be hosted in.
     example: ["en", "nl"]
-  price: { $ref: "./Money.yaml" }
   images:
     type: array
     items:

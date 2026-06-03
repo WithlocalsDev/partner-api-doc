@@ -29,7 +29,11 @@ properties:
     format: uuid
     description: Withlocals booking id. Refetch via `GET /bookings/{bookingId}` for full state.
     example: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
-  status: { $ref: "./BookingStatus.yaml" }
+  status:
+    type: string
+    enum: [CANCELLED]
+    description: Booking lifecycle state. Always `CANCELLED` for this event.
+    example: CANCELLED
   cancellationReason:
     type: string
     enum: [CANCELLEDBYGUEST, CANCELLEDBYHOST, CANCELLEDBYADMIN, HOSTNOSHOW]
