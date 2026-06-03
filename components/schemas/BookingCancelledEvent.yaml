@@ -3,8 +3,9 @@ description: |
   Payload of the `booking.cancelled` webhook. Thin by design — partner
   refetches the full booking via `GET /bookings/{bookingId}` if needed.
 
-  `status` is the **who** (the role that initiated the cancellation);
-  `cancellationReason` is the **why** (the specific motivation).
+  `status` and `cancellationReason` mirror the booking API: `status` is the
+  lifecycle state (always `CANCELLED` for this event) and `cancellationReason`
+  identifies who initiated the cancellation.
 required: [eventId, eventType, occurredAt, bookingId, status, cancellationReason]
 properties:
   eventId:
@@ -28,9 +29,12 @@ properties:
     format: uuid
     description: Withlocals booking id. Refetch via `GET /bookings/{bookingId}` for full state.
     example: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
-  status:
+  status: { $ref: "./BookingStatus.yaml" }
+  cancellationReason:
     type: string
     enum: [CANCELLEDBYGUEST, CANCELLEDBYHOST, CANCELLEDBYADMIN, HOSTNOSHOW]
-    description: Who initiated the cancellation.
-    example: CANCELLEDBYHOST
-  cancellationReason: { $ref: "./CancellationReason.yaml" }
+    description: |
+      Present when `status=CANCELLED`. Partner-initiated cancellations
+      (`DELETE /bookings/{bookingId}`) always set `CANCELLEDBYGUEST`; the
+      other values appear on bookings cancelled internally by the host,
+      admin, or marked as a no-show.
