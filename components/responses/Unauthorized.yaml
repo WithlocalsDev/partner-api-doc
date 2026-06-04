@@ -1,18 +1,8 @@
 description: Missing or invalid Bearer token.
-headers:
-  WWW-Authenticate:
-    description: |
-      Indicates the required auth scheme and the reason the request was
-      rejected. Follows RFC 6750 (Bearer Token Usage) — the `error` parameter
-      is `invalid_token` for an expired/revoked/malformed token and
-      `invalid_request` for a missing/malformed `Authorization` header.
-    schema:
-      type: string
-    example: 'Bearer realm="Withlocals Partner API", error="invalid_token"'
 content:
   application/json:
     schema: { $ref: "../schemas/Error.yaml" }
     example:
       error: UNAUTHORIZED
-      errorMessage: "Missing or invalid Bearer token."
+      errorMessage: "Missing or invalid API token"
       requestId: "req_7c2b18d1"

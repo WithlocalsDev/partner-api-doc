@@ -8,7 +8,8 @@ post:
     a remaining vacancy count, and the list of configured start times —
     enough to render a month grid with tooltips without a follow-up call.
 
-    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `NOT_FOUND` (product
+    unknown or not bookable).
   requestBody:
     required: true
     content:
@@ -25,3 +26,4 @@ post:
           schema: { $ref: "../components/schemas/AvailabilityCalendar.yaml" }
     "400": { $ref: "../components/responses/BadRequest.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
+    "404": { $ref: "../components/responses/NotFound.yaml" }

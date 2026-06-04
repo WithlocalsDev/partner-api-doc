@@ -36,7 +36,7 @@ put:
     required: true
     content:
       application/json:
-        schema: { $ref: "../components/schemas/Webhook.yaml" }
+        schema: { $ref: "../components/schemas/WebhookRegistration.yaml" }
   responses:
     "200":
       description: Updated

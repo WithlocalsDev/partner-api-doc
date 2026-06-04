@@ -2,7 +2,7 @@ type: object
 description: |
   A partner booking. Returned by create, amend, cancel, and read.
 
-  When `status=CANCELLEDBYGUEST`, `cancellationReason` is set and the record persists
+  When `status=CANCELLED`, `cancellationReason` is set and the record persists
   for partner refund handling.
 required: [id, status, productId, title, date, time, timeZone, createdAt]
 properties:

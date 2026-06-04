@@ -1,6 +1,6 @@
 type: object
 description: |
-  Body of `PATCH /bookings/{bookingId}`. Any subset of fields may be supplied;
+  Body of `PATCH /bookings/{bookingId}`. Any subset of fields may be supplied.
 properties:
   date: { type: string, format: date }
   time:
@@ -8,4 +8,3 @@ properties:
     pattern: "^[0-2][0-9]:[0-5][0-9]$"
   numberOfAdults: { type: integer, minimum: 1 }
   numberOfChildren: { type: integer, minimum: 0 }
-  supplierPrice: { $ref: "./Money.yaml" }

@@ -13,8 +13,6 @@ properties:
       - NOT_FOUND             # 404 — resource not found / not visible to this partner
       - CONFLICT              # 409 — concurrent change / duplicate / hold already expired
       - PRECONDITION_FAILED   # 412 — booking not amendable/cancellable
-      - UNPROCESSABLE         # 422 — domain rule violation (e.g. invalid party size)
-      - RATE_LIMITED          # 429 — per-partner rate limit
       - INTERNAL_ERROR        # 500
   errorMessage:
     type: string

@@ -32,4 +32,3 @@ properties:
     type: string
     description: ISO-639-1 language code.
     example: "en"
-  supplierPrice: { $ref: "./Money.yaml" }

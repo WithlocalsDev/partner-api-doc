@@ -4,14 +4,12 @@ get:
   summary: Bookings list
   description: |
     Returns bookings matching the supplied filters. Filters combine with
-    `AND`.
-
-    **At least one** of `partnerReference`, `supplierReference`, `date`, or
-    the `fromDate` + `toDate` pair must be supplied — a request with no
-    filters returns `400`.
+    `AND`. All filters are optional; with none supplied, a default date
+    window is applied (roughly the last month through the next year).
 
     Use `date` for an exact day, or `fromDate` + `toDate` for a range —
-    `date` is mutually exclusive with the range pair.
+    `date` is mutually exclusive with the range pair (supplying both
+    returns `400`).
 
     Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`.
   parameters:
@@ -21,11 +19,6 @@ get:
       description: Partner's own booking id.
       schema: { type: string }
       example: "XYZ-001"
-    - name: supplierReference
-      in: query
-      required: false
-      description: Withlocals booking id (UUID).
-      schema: { type: string, format: uuid }
     - name: date
       in: query
       required: false
@@ -64,7 +57,8 @@ post:
   description: |
     Creates a `CONFIRMED` booking. Use `Idempotency-Key` to make retries safe.
 
-    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `CONFLICT` (slot no longer available).
+    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `NOT_FOUND` (product
+    unknown or not bookable), `CONFLICT` (slot no longer available).
   parameters:
     - $ref: "../components/parameters/IdempotencyKey.yaml"
   requestBody:
@@ -86,4 +80,5 @@ post:
               $ref: "../examples/booking-confirmed.yaml"
     "400": { $ref: "../components/responses/BadRequest.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
+    "404": { $ref: "../components/responses/NotFound.yaml" }
     "409": { $ref: "../components/responses/Conflict.yaml" }

@@ -4,9 +4,10 @@ get:
   summary: Get a booking by id
   description: |
     Reads a single booking by its Withlocals id. Ownership-scoped: a partner
-    can only fetch bookings belonging to its own company.
+    can only fetch bookings belonging to its own company. A booking owned by
+    another partner returns `404` (not `403`), so existence is not revealed.
 
-    Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
+    Possible errors: `NOT_FOUND`, `UNAUTHORIZED`.
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
   responses:
@@ -19,7 +20,6 @@ get:
             confirmed:
               $ref: "../examples/booking-confirmed.yaml"
     "404": { $ref: "../components/responses/NotFound.yaml" }
-    "403": { $ref: "../components/responses/Forbidden.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
 
 patch:
@@ -57,13 +57,16 @@ delete:
   operationId: cancelBooking
   summary: Cancel a booking
   description: |
-    Cancels a booking. The booking **persists** with `status=CANCELLEDBYGUEST` and a
-    `cancellationReason`; a subsequent `GET` still returns it.
+    Cancels a booking. The booking **persists** with `status=CANCELLED` and a
+    `cancellationReason` of `CANCELLEDBYGUEST` (partner-initiated cancellations
+    are always attributed to the guest); a subsequent `GET` still returns it.
 
     The cancellation `reason` may be sent in the request body, or as the
-    `reason` query parameter for clients that cannot send `DELETE` bodies.
+    `reason` query parameter for clients that cannot send `DELETE` bodies. When
+    supplied, it must be one of the `GuestCancellationReason` values, otherwise
+    the request returns `400`.
 
-    Possible errors: `NOT_FOUND`, `FORBIDDEN`, `UNAUTHORIZED`.
+    Possible errors: `BAD_REQUEST` (invalid `reason`), `NOT_FOUND`, `UNAUTHORIZED`.
   parameters:
     - $ref: "../components/parameters/BookingId.yaml"
     - name: reason
@@ -85,6 +88,6 @@ delete:
           examples:
             golden:
               $ref: "../examples/cancel-response-cancelled.yaml"
+    "400": { $ref: "../components/responses/BadRequest.yaml" }
     "404": { $ref: "../components/responses/NotFound.yaml" }
-    "403": { $ref: "../components/responses/Forbidden.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
