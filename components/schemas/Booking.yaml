@@ -60,6 +60,12 @@ properties:
   specialRequest:
     type: string
     description: Free-text note from the guest, forwarded to the host.
+  guestPhoneNumber:
+    type: string
+    description: |
+      Phone number of the guest who made the booking. Absent when the guest
+      has no phone number on their profile.
+    example: "+31201234567"
 
   host:
     type: object
