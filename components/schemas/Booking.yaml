@@ -80,3 +80,7 @@ properties:
     description: Minimal host details for day-of identification.
     properties:
       firstName: { type: string, example: "Ren" }
+      phoneNumber:
+        type: string
+        description: Absent when the host has no phone number on their profile.
+        example: "+31201234567"
