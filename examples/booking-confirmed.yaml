@@ -16,6 +16,9 @@ value:
     lat: 52.3617
     lon: 4.8907
   tourLanguage: "en"
-  guestPhoneNumber: "+31201234567"
-  host:
+  mainGuest:
     firstName: "Anna"
+    lastName: "Jansen"
+    phoneNumber: "+31201234567"
+  host:
+    firstName: "Carla"

@@ -60,12 +60,19 @@ properties:
   specialRequest:
     type: string
     description: Free-text note from the guest, forwarded to the host.
-  guestPhoneNumber:
-    type: string
+  mainGuest:
+    type: object
+    required: [firstName]
     description: |
-      Phone number of the guest who made the booking. Absent when the guest
-      has no phone number on their profile.
-    example: "+31201234567"
+      The main guest (traveller) on the booking. This is the lead traveller
+      supplied as `mainGuest` on create. Absent when no main guest is recorded.
+    properties:
+      firstName: { type: string, example: "Maria" }
+      lastName: { type: string, example: "Rossi" }
+      phoneNumber:
+        type: string
+        description: Absent when the main guest has no phone number on their profile.
+        example: "+31201234567"
 
   host:
     type: object
