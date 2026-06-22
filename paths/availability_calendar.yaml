@@ -1,7 +1,7 @@
 post:
   tags: [Availability]
   operationId: availabilityCalendar
-  summary: Availability calendar
+  summary: Get availability calendar
   description: |
     Returns a single object per day across the requested date range.
     Each entry carries a coarse `AVAILABLE` / `SOLD_OUT` / `CLOSED` status,

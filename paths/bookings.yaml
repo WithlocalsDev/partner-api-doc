@@ -1,7 +1,7 @@
 get:
   tags: [Bookings]
   operationId: listBookings
-  summary: Bookings list
+  summary: List bookings
   description: |
     Returns bookings matching the supplied filters. Filters combine with
     `AND`. All filters are optional; with none supplied, a default date

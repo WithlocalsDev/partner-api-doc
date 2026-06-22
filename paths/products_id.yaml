@@ -3,7 +3,7 @@ get:
   operationId: getProduct
   summary: Get a single product by id
   description: |
-    Fetch one product by id.
+    Fetch single product by id.
 
     Possible errors: `NOT_FOUND`, `UNAUTHORIZED`.
   parameters:

@@ -1,6 +1,6 @@
 description: |
   Precondition for the action is not met (e.g. the booking is past its
-  partner-amendable window).
+  amendment cut-off).
 content:
   application/json:
     schema: { $ref: "../schemas/Error.yaml" }

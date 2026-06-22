@@ -1,7 +1,7 @@
 get:
   tags: [Bookings]
   operationId: getBooking
-  summary: Get a booking by id
+  summary: Get a single booking by id
   description: |
     Reads a single booking by its Withlocals id. Ownership-scoped: a partner
     can only fetch bookings belonging to its own company. A booking owned by

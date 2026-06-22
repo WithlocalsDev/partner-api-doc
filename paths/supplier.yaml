@@ -1,7 +1,7 @@
 get:
   tags: [Supplier]
   operationId: getSupplier
-  summary: Supplier
+  summary: Get supplier details
   description: |
     Returns the supplier's self-description.
 

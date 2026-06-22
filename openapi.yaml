@@ -20,7 +20,7 @@ info:
 
 servers:
   - url: https://test-api.withlocals.com/v1/partner
-    description: Production
+    description: Test / Sandbox
 
 security:
   - bearerAuth: []

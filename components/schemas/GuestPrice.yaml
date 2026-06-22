@@ -9,9 +9,9 @@ properties:
   retailPrice:
     $ref: "./Money.yaml"
     description: |
-      Per-person price the end guest pays, incl. service fee.
+      Per-person price the guest pays, including the service fee.
   netPrice:
     $ref: "./Money.yaml"
     description: |
-      Per-person price the partner pays Withlocals, incl. service fee, with the
-      partner discount applied.
+      Per-person price the partner pays Withlocals, including the service fee,
+      with the partner discount applied.
