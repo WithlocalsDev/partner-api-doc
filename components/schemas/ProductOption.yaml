@@ -21,6 +21,6 @@ properties:
     type: array
     items: { $ref: "./GuestPrice.yaml" }
     description: |
-      Per-person price per party size (`minGuests`..`maxGuests`), incl. service
-      fee, with the partner discount applied. Party sizes with no configured
-      price are omitted. Authoritative price source.
+      Per-person retail and net price per party size
+      (`minGuests`..`maxGuests`). Party sizes with no configured price are
+      omitted. Authoritative price source.

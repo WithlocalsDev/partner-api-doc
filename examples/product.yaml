@@ -23,15 +23,19 @@ value:
       restrictions: { minGuests: 1, maxGuests: 8 }
       pricingPerGuest:
         - guests: 1
-          price: { amount: 9000, currency: "EUR" }
+          retailPrice: { amount: 9000, currency: "EUR" }
+          netPrice: { amount: 7650, currency: "EUR" }
         - guests: 2
-          price: { amount: 6000, currency: "EUR" }
+          retailPrice: { amount: 6000, currency: "EUR" }
+          netPrice: { amount: 5100, currency: "EUR" }
     - id: "afternoon"
       default: false
       availabilityLocalStartTimes: ["13:30"]
       restrictions: { minGuests: 2, maxGuests: 6 }
       pricingPerGuest:
         - guests: 2
-          price: { amount: 6500, currency: "EUR" }
+          retailPrice: { amount: 6500, currency: "EUR" }
+          netPrice: { amount: 5525, currency: "EUR" }
         - guests: 4
-          price: { amount: 5500, currency: "EUR" }
+          retailPrice: { amount: 5500, currency: "EUR" }
+          netPrice: { amount: 4675, currency: "EUR" }

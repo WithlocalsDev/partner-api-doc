@@ -1,6 +1,6 @@
 type: object
 description: |
-  Supplier price.
+  A monetary amount in minor units.
 required: [amount, currency]
 properties:
   amount:
