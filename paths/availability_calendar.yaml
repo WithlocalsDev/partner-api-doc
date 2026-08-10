@@ -3,13 +3,27 @@ post:
   operationId: availabilityCalendar
   summary: Get availability calendar
   description: |
-    Returns a single object per day across the requested date range.
-    Each entry carries a coarse `AVAILABLE` / `SOLD_OUT` / `CLOSED` status,
-    a remaining vacancy count, and the list of configured start times —
-    enough to render a month grid with tooltips without a follow-up call.
+    Day-by-day availability for one product.
 
-    Possible errors: `BAD_REQUEST`, `UNAUTHORIZED`, `NOT_FOUND` (product
-    unknown or not bookable).
+    Returns one entry per day, inclusive of both `from` and `to`, in ascending
+    date order. Each entry answers three questions: can anything be booked
+    (`status`), how much is left (`vacancies`), and at which times
+    (`startingTimes`) - enough to render a month grid without a follow-up call
+    per day.
+
+    `startingTimes` contains only times that can actually be booked, so it is
+    safe to drive a time picker directly from it. It is empty on `SOLD_OUT`
+    and `CLOSED` days.
+
+    ### Range limits
+
+    The range may span at most **92 days**, counting both endpoints. Past
+    dates are accepted and come back with no availability.
+
+    Returns `400` if the range exceeds 92 days, or if `from` is after `to`.
+
+    Possible errors: `BAD_REQUEST` (range invalid or too long), `UNAUTHORIZED`,
+    `NOT_FOUND` (product unknown or not bookable).
   requestBody:
     required: true
     content:
@@ -24,6 +38,9 @@ post:
       content:
         application/json:
           schema: { $ref: "../components/schemas/AvailabilityCalendar.yaml" }
+          examples:
+            golden:
+              $ref: "../examples/availability-calendar.yaml"
     "400": { $ref: "../components/responses/BadRequest.yaml" }
     "401": { $ref: "../components/responses/Unauthorized.yaml" }
     "404": { $ref: "../components/responses/NotFound.yaml" }

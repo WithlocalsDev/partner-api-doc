@@ -1,0 +1,37 @@
+summary: 7-day window, mixed statuses
+description: |
+  Note `2026-07-15`: three vacancies but only two starting times. Two hosts are
+  free at `10:00`, which is two free slots but one entry in `startingTimes`.
+  And `2026-07-16` shows a day where the product advertises a full schedule yet
+  a single time is bookable - `startingTimes` reports only what can actually be
+  booked, never the configured schedule.
+value:
+  availability:
+    - date: "2026-07-15"
+      status: AVAILABLE
+      vacancies: 3
+      startingTimes: ["10:00", "14:00"]
+    - date: "2026-07-16"
+      status: AVAILABLE
+      vacancies: 1
+      startingTimes: ["10:00"]
+    - date: "2026-07-17"
+      status: SOLD_OUT
+      vacancies: 0
+      startingTimes: []
+    - date: "2026-07-18"
+      status: SOLD_OUT
+      vacancies: 0
+      startingTimes: []
+    - date: "2026-07-19"
+      status: CLOSED
+      vacancies: 0
+      startingTimes: []
+    - date: "2026-07-20"
+      status: AVAILABLE
+      vacancies: 4
+      startingTimes: ["10:00", "10:30", "11:00", "15:00"]
+    - date: "2026-07-21"
+      status: AVAILABLE
+      vacancies: 2
+      startingTimes: ["16:00", "16:30"]
