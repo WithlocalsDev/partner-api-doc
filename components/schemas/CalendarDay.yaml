@@ -7,23 +7,48 @@ properties:
     type: string
     enum: [AVAILABLE, SOLD_OUT, CLOSED]
     description: |
-      - `AVAILABLE` — at least one start time has capacity.
-      - `SOLD_OUT` — start times exist but none has capacity.
-      - `CLOSED` — no start times configured for this day.
+      Whether anything can be booked on this day.
+
+      - `AVAILABLE` — at least one slot is free. `vacancies` is above `0`.
+      - `SOLD_OUT` — the product runs this day, but nothing is free: every
+        host is booked, away, or past their lead-time cutoff. `vacancies` is
+        `0` and `startingTimes` is empty.
+      - `CLOSED` — the product does not run this day at all: it has no start
+        times configured, or the whole day is blocked at product level. Hosts
+        being unavailable gives `SOLD_OUT`, never `CLOSED`.
   vacancies:
     type: integer
     minimum: 0
     description: |
-      Total remaining bookable spots across all start times on this day.
+      How many slots are free, where one slot is one host at one start time.
+
+      **This is not a seat count.** A slot is exclusive to a single party and
+      holds up to `Product.options[].restrictions.maxGuests`, so one vacancy
+      serves a party of 1 or a party of 8 alike. Never compare `vacancies`
+      against your party size — check `minGuests`/`maxGuests` for that.
+
+      It is also not the length of `startingTimes`: two hosts free at `10:00`
+      give `vacancies: 2` with `startingTimes: ["10:00"]`.
+
       `0` when `status` is `SOLD_OUT` or `CLOSED`.
-    example: 20
+    example: 2
   startingTimes:
     type: array
     items:
       type: string
       pattern: "^[0-2][0-9]:[0-5][0-9]$"
     description: |
-      Local-time start times configured for this day (`HH:MM`, 24h).
-      Empty when `status` is `CLOSED`. Populated for `AVAILABLE` and
-      `SOLD_OUT` — distinguishing "no times at all" from "times exist but full".
+      The start times you can actually book on this day. Local time to the
+      product's timezone, `HH:MM` 24-hour, sorted ascending, each time listed
+      once no matter how many hosts offer it.
+
+      Safe to render straight into a time picker - every entry is bookable.
+
+      **This is not the product's configured schedule.** A product offering a
+      start every 30 minutes can return a single entry here once host
+      availability, existing bookings, and lead-time rules are applied. The
+      advertised schedule is `Product.options[].availabilityLocalStartTimes`;
+      this field is always a subset of it.
+
+      Empty when `status` is `SOLD_OUT` or `CLOSED`.
     example: ["10:00", "14:00"]

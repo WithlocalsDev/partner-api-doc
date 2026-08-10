@@ -5,11 +5,19 @@ properties:
   productId: { type: string, format: uuid }
   dateRange:
     type: object
+    description: |
+      Both bounds are inclusive, and the range may span at most 92 days
+      counting both endpoints. `from` must not be after `to`. Violating
+      either rule returns `400`.
     required: [from, to]
     properties:
-      from: { type: string, format: date, example: "2026-07-15" }
+      from:
+        type: string
+        format: date
+        description: First day to report on, inclusive.
+        example: "2026-07-15"
       to:
         type: string
         format: date
-        description: Range length is capped server-side (see operation description).
+        description: Last day to report on, inclusive. At most 91 days after `from`.
         example: "2026-07-21"
