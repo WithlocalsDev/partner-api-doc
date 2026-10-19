@@ -14,9 +14,12 @@
     "preview": "yarn build && serve dist -l 3001"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.25.0",
+    "@redocly/cli": "^1.34.21",
     "@stoplight/spectral-cli": "^6.13.0",
     "rimraf": "^5.0.5",
     "serve": "^14.2.6"
+  },
+  "resolutions": {
+    "compression": "1.8.2"
   }
 }
