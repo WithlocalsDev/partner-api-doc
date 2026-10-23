@@ -4,8 +4,9 @@ required: [name]
 properties:
   name:
     type: string
-    description: Short human-readable name.
-    example: "Hyakumanben Chion-ji Temple"
+    description: >-
+      Short human-readable name. For a guest pickup it reads "Pickup at your accommodation".
+    example: "〒600-8012 Kyoto"
   address:
     type: string
     description: Formatted address line.
@@ -22,4 +23,10 @@ properties:
     example: 135.7807599
   instructions:
     type: string
-    description: Free-text guidance for finding the meeting spot.
+    description: Free-text guidance from the host for finding the meeting spot.
+    example: "Wait at the main gate"
+  mapsUrl:
+    type: string
+    format: uri
+    description: Link that opens the meeting spot in Google Maps. Present whenever `lat` and `lon` are present.
+    example: "https://www.google.com/maps/search/?api=1&query=35.0298797,135.7807599"
