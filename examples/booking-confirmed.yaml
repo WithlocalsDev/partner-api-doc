@@ -11,10 +11,12 @@ value:
   cancellationDeadline: "2026-07-08T08:00:00Z"
   createdAt: "2026-05-28T13:42:11Z"
   meetingPoint:
-    name: "Café Brecht"
+    name: "Weteringschans 157"
     address: "Weteringschans 157, 1017 SE Amsterdam, Netherlands"
     lat: 52.3617
     lon: 4.8907
+    instructions: "At the terrace tables, look for the host with the Withlocals sign"
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=52.3617,4.8907"
   tourLanguage: "en"
   mainGuest:
     firstName: "Anna"
